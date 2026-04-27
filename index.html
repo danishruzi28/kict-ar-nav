@@ -27,18 +27,35 @@
     </a-scene>
 
     <script>
-        function initLevel(lvl) {
-            const container = document.querySelector('#level-container');
+    function initLevel(lvl) {
+        console.log("Function initLevel called for Level:", lvl);
+        const container = document.querySelector('#level-container');
+        
+        if (!container) {
+            console.error("CRITICAL: #level-container not found!");
+            return;
+        }
+
+        try {
             if (lvl === 1) {
                 container.innerHTML = loadLevel1();
             } else {
                 container.innerHTML = loadLevel2();
             }
             alert("Loaded Level " + lvl);
+        } catch (err) {
+            console.error("JS Error: Check if level1.js is loaded.", err);
+            alert("Error: level1.js or level2.js might be missing!");
         }
-        
-        // Default to Level 1 on start
-        window.onload = () => initLevel(1);
-    </script>
+    }
+
+    // Wait for the full page and all scripts to be ready
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("DOM Ready. Waiting 2 seconds for AR.js...");
+        setTimeout(() => {
+            initLevel(1);
+        }, 2000); 
+    });
+</script>
 </body>
 
