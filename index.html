@@ -19,7 +19,11 @@
         <button class="nav-button" onclick="initLevel(2)">Level 2</button>
     </div>
 
-    <a-scene embedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false">
+    <a-scene
+        embedded 
+        vr-mode-ui="enabled: false"
+        renderer="antialias: false; precision: medium;" 
+        arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; trackingMethod: best; maxDetectionRate: 30; debugUIEnabled: false;">
         
         <a-entity id="level1-group" visible="false">
         <a-entity id="l1-content"></a-entity>
@@ -47,28 +51,31 @@
             } else {
                 container.innerHTML = loadLevel2();
             }
-            alert("Loaded Level " + lvl);
         } catch (err) {
             console.error("Error injecting HTML:", err);
         }
     }
 
 window.onload = function() {
-    // Fill the containers once so the browser already knows the 3D shapes
-    document.querySelector('#l1-content').innerHTML = loadLevel1();
-    document.querySelector('#l2-content').innerHTML = loadLevel2();
-};
+        try {
+            const l1Content = document.querySelector('#l1-content');
+            const l2Content = document.querySelector('#l2-content');
+            
+            // Inject HTML from your .js files ONLY ONCE
+            l1Content.innerHTML = loadLevel1();
+            l2Content.innerHTML = loadLevel2();
+            
+            console.log("Assets pre-loaded to memory.");
+        } catch (e) {
+            console.error("Error pre-loading levels:", e);
+        }
+    };
 
-function initLevel(lvl) {
+    function initLevel(lvl) {
         const l1 = document.querySelector('#level1-group');
         const l2 = document.querySelector('#level2-group');
 
-        // Safety check: Make sure the groups exist in the HTML
-        if (!l1 || !l2) {
-            console.log("Waiting for scene to be ready...");
-            return;
-        }
-
+        // Instead of innerHTML (heavy), we use .setAttribute (light)
         if (lvl === 1) {
             l1.setAttribute('visible', 'true');
             l2.setAttribute('visible', 'false');
@@ -77,26 +84,9 @@ function initLevel(lvl) {
             l2.setAttribute('visible', 'true');
         }
         
+        // Use console.log instead of alert to prevent camera freezing
         console.log("Switched to Level " + lvl);
-        alert("Active: Level " + lvl);
     }
-
-    // This handles the first load
-    window.addEventListener('load', () => {
-        // 1. Inject the data from your .js files into the placeholders
-        try {
-            document.querySelector('#l1-content').innerHTML = loadLevel1();
-            document.querySelector('#l2-content').innerHTML = loadLevel2();
-            
-            // 2. Start Level 1 after a small delay to prevent lag
-            setTimeout(() => {
-                initLevel(1);
-            }, 1500);
-        } catch (e) {
-            console.error("Could not find loadLevel functions. Check your .js files!");
-        }
-    });
-
 </script>
 </body>
 
