@@ -14,6 +14,8 @@
 
 <body style="margin: 0; overflow: hidden;">
 
+    <div id="level-toast">Entering Level 1...</div>
+
     <div class="nav-container">
         <button class="nav-button" onclick="initLevel(1)">Level 1</button>
         <button class="nav-button" onclick="initLevel(2)">Level 2</button>
@@ -72,21 +74,31 @@ window.onload = function() {
     };
 
     function initLevel(lvl) {
-        const l1 = document.querySelector('#level1-group');
-        const l2 = document.querySelector('#level2-group');
+    const l1 = document.querySelector('#level1-group');
+    const l2 = document.querySelector('#level2-group');
+    const toast = document.querySelector('#level-toast');
 
-        // Instead of innerHTML (heavy), we use .setAttribute (light)
-        if (lvl === 1) {
-            l1.setAttribute('visible', 'true');
-            l2.setAttribute('visible', 'false');
-        } else {
-            l1.setAttribute('visible', 'false');
-            l2.setAttribute('visible', 'true');
-        }
-        
-        // Use console.log instead of alert to prevent camera freezing
-        console.log("Switched to Level " + lvl);
+    // 1. Toggle visibility
+    if (lvl === 1) {
+        l1.setAttribute('visible', 'true');
+        l2.setAttribute('visible', 'false');
+        toast.innerHTML = "📍 Now at KICT Level 1";
+    } else {
+        l1.setAttribute('visible', 'false');
+        l2.setAttribute('visible', 'true');
+        toast.innerHTML = "📍 Now at KICT Level 2";
     }
+
+    // 2. Trigger the Animation
+    toast.className = "show";
+    
+    // 3. Remove the class after 3 seconds so it can be played again
+    setTimeout(function(){ 
+        toast.className = toast.className.replace("show", ""); 
+    }, 3000);
+
+    console.log("Switched to Level " + lvl);
+}
 </script>
 </body>
 
