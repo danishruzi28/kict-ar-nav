@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>KICT Indoor AR Nav</title>
+<head>
+    <title>KICT AR Navigation</title>
+    <link rel="stylesheet" href="style.css">
+    
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  </head>
-  <body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-      
-      <a-marker preset="hiro">
-        <a-text value="Go to Lab 1 ->" position="-1 1 0" color="yellow" width="4"></a-text>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+
+    <script src="level1.js"></script>
+    <script src="level2.js"></script>
+</head>
+
+<body style="margin: 0; overflow: hidden;">
+
+    <div class="nav-container">
+        <button class="nav-button" onclick="initLevel(1)">Level 1</button>
+        <button class="nav-button" onclick="initLevel(2)">Level 2</button>
+    </div>
+
+    <a-scene embedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
         
-        <a-entity 
-          geometry="primitive: cone; radiusBottom: 0.2; height: 1" 
-          rotation="0 0 -90" 
-          position="1 0.5 0" 
-          material="color: cyan">
-        </a-entity>
-      </a-marker>
+        <a-entity id="level-container"></a-entity>
 
-      <a-marker type="barcode" value="5">
-        <a-text value="<- Elevator this way" position="-1 1 0" color="red"></a-text>
-      </a-marker>
-
-      <a-entity camera></a-entity>
+        <a-entity camera></a-entity>
     </a-scene>
-  </body>
-</html>
+
+    <script>
+        function initLevel(lvl) {
+            const container = document.querySelector('#level-container');
+            if (lvl === 1) {
+                container.innerHTML = loadLevel1();
+            } else {
+                container.innerHTML = loadLevel2();
+            }
+            alert("Loaded Level " + lvl);
+        }
+        
+        // Default to Level 1 on start
+        window.onload = () => initLevel(1);
+    </script>
+</body>
+

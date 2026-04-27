@@ -1,0 +1,39 @@
+/* Ensure the AR canvas stays in the background */
+canvas.a-canvas {
+    z-index: 0;
+}
+
+/* Style the navigation menu container */
+.nav-container {
+    position: fixed;
+    bottom: 30;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    z-index: 99999; /* This ensures it stays on top of the camera */
+    pointer-events: auto;
+}
+
+/* Style the buttons to look like a modern mobile app */
+.nav-button {
+    background-color: #007bff; /* IIUM Blue-ish */
+    color: white;
+    border: 2px;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+.a-canvas {
+    z-index: 0;
+}
+
+.nav-button:active {
+    background-color: #0056b3;
+    transform: scale(0.95);
+}
