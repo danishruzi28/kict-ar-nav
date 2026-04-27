@@ -21,7 +21,7 @@
 
     <a-scene embedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false">
         
-        <a-entity id="level1-group" visible="true">
+        <a-entity id="level1-group" visible="false">
         <a-entity id="l1-content"></a-entity>
         </a-entity>
 
@@ -60,18 +60,42 @@ window.onload = function() {
 };
 
 function initLevel(lvl) {
-    const l1 = document.querySelector('#level1-group');
-    const l2 = document.querySelector('#level2-group');
+        const l1 = document.querySelector('#level1-group');
+        const l2 = document.querySelector('#level2-group');
 
-    if (lvl === 1) {
-        l1.setAttribute('visible', 'true');
-        l2.setAttribute('visible', 'false');
-    } else {
-        l1.setAttribute('visible', 'false');
-        l2.setAttribute('visible', 'true');
+        // Safety check: Make sure the groups exist in the HTML
+        if (!l1 || !l2) {
+            console.log("Waiting for scene to be ready...");
+            return;
+        }
+
+        if (lvl === 1) {
+            l1.setAttribute('visible', 'true');
+            l2.setAttribute('visible', 'false');
+        } else {
+            l1.setAttribute('visible', 'false');
+            l2.setAttribute('visible', 'true');
+        }
+        
+        console.log("Switched to Level " + lvl);
+        alert("Active: Level " + lvl);
     }
-    // No more innerHTML here = No more lag!
-}
+
+    // This handles the first load
+    window.addEventListener('load', () => {
+        // 1. Inject the data from your .js files into the placeholders
+        try {
+            document.querySelector('#l1-content').innerHTML = loadLevel1();
+            document.querySelector('#l2-content').innerHTML = loadLevel2();
+            
+            // 2. Start Level 1 after a small delay to prevent lag
+            setTimeout(() => {
+                initLevel(1);
+            }, 1500);
+        } catch (e) {
+            console.error("Could not find loadLevel functions. Check your .js files!");
+        }
+    });
 
 </script>
 </body>
