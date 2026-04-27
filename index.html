@@ -28,14 +28,13 @@
 
     <script>
     function initLevel(lvl) {
-        console.log("Function initLevel called for Level:", lvl);
-        const container = document.querySelector('#level-container');
-        
-        if (!container) {
-            console.error("CRITICAL: #level-container not found!");
-            return;
+        // We add a check to see if the function actually exists yet
+        if (typeof loadLevel1 !== "function") {
+            console.error("Functions not loaded yet. Retrying...");
+            return; 
         }
 
+        const container = document.querySelector('#level-container');
         try {
             if (lvl === 1) {
                 container.innerHTML = loadLevel1();
@@ -44,18 +43,19 @@
             }
             alert("Loaded Level " + lvl);
         } catch (err) {
-            console.error("JS Error: Check if level1.js is loaded.", err);
-            alert("Error: level1.js or level2.js might be missing!");
+            console.error("Error injecting HTML:", err);
         }
     }
 
-    // Wait for the full page and all scripts to be ready
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log("DOM Ready. Waiting 2 seconds for AR.js...");
+    // This 'DOMContentLoaded' ensures the HTML is ready, 
+    // but 'window.onload' ensures the .js files are ALSO ready.
+    window.onload = function() {
+        console.log("All files loaded. Starting Level 1...");
+        // Give it a tiny 500ms heartbeat to be safe
         setTimeout(() => {
             initLevel(1);
-        }, 2000); 
-    });
+        }, 500);
+    };
 </script>
 </body>
 
