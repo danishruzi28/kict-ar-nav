@@ -19,9 +19,15 @@
         <button class="nav-button" onclick="initLevel(2)">Level 2</button>
     </div>
 
-    <a-scene embedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+    <a-scene embedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false">
         
-        <a-entity id="level-container"></a-entity>
+        <a-entity id="level1-group" visible="true">
+        <a-entity id="l1-content"></a-entity>
+        </a-entity>
+
+        <a-entity id="level2-group" visible="false">
+        <a-entity id="l2-content"></a-entity>
+        </a-entity>
 
         <a-entity camera></a-entity>
     </a-scene>
@@ -47,15 +53,26 @@
         }
     }
 
-    // This 'DOMContentLoaded' ensures the HTML is ready, 
-    // but 'window.onload' ensures the .js files are ALSO ready.
-    window.onload = function() {
-        console.log("All files loaded. Starting Level 1...");
-        // Give it a tiny 500ms heartbeat to be safe
-        setTimeout(() => {
-            initLevel(1);
-        }, 500);
-    };
+window.onload = function() {
+    // Fill the containers once so the browser already knows the 3D shapes
+    document.querySelector('#l1-content').innerHTML = loadLevel1();
+    document.querySelector('#l2-content').innerHTML = loadLevel2();
+};
+
+function initLevel(lvl) {
+    const l1 = document.querySelector('#level1-group');
+    const l2 = document.querySelector('#level2-group');
+
+    if (lvl === 1) {
+        l1.setAttribute('visible', 'true');
+        l2.setAttribute('visible', 'false');
+    } else {
+        l1.setAttribute('visible', 'false');
+        l2.setAttribute('visible', 'true');
+    }
+    // No more innerHTML here = No more lag!
+}
+
 </script>
 </body>
 
