@@ -37,31 +37,42 @@ canvas.a-canvas {
     background-color: #0056b3;
     transform: scale(0.95);
 }
-/* Reminder Notification Style */
 #level-toast {
     visibility: hidden;
-    min-width: 200px;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
+    min-width: 250px;
+    background-color: rgba(0, 0, 0, 0.85); /* Slightly darker for better contrast */
+    color: #00FFFF; /* KICT Cyan */
     text-align: center;
-    border-radius: 10px;
-    padding: 16px;
+    border-radius: 15px;
+    padding: 20px;
     position: fixed;
     z-index: 10000;
+    
+    /* Perfect Center Positioning */
     left: 50%;
-    top: 50px;
-    transform: translateX(-50%);
-    font-family: sans-serif;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
     font-weight: bold;
-    border: 2px solid #00FFFF;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+    border: 3px solid #00FFFF;
+    box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.4);
+    pointer-events: none; /* User can click "through" it if needed */
 }
 
-/* Animation to show/hide */
+/* Updated Animation for Center Pop-in */
 #level-toast.show {
     visibility: visible;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: zoomInFade 0.5s, fadeout 0.5s 2.5s;
 }
 
-@keyframes fadein { from {top: 0; opacity: 0;} to {top: 50px; opacity: 1;} }
-@keyframes fadeout { from {top: 50px; opacity: 1;} to {top: 0; opacity: 0;} }
+@keyframes zoomInFade {
+    from { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

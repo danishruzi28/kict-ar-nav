@@ -14,7 +14,7 @@
 
 <body style="margin: 0; overflow: hidden;">
 
-    <div id="level-toast">Entering Level 1...</div>
+    <div id="level-toast">System Ready</div>
 
     <div class="nav-container">
         <button class="nav-button" onclick="initLevel(1)">Level 1</button>
@@ -40,23 +40,27 @@
 
     <script>
     function initLevel(lvl) {
-        // We add a check to see if the function actually exists yet
-        if (typeof loadLevel1 !== "function") {
-            console.error("Functions not loaded yet. Retrying...");
-            return; 
-        }
+    const l1 = document.querySelector('#level1-group');
+    const l2 = document.querySelector('#level2-group');
+    const toast = document.querySelector('#level-toast');
 
-        const container = document.querySelector('#level-container');
-        try {
-            if (lvl === 1) {
-                container.innerHTML = loadLevel1();
-            } else {
-                container.innerHTML = loadLevel2();
-            }
-        } catch (err) {
-            console.error("Error injecting HTML:", err);
-        }
+    if (lvl === 1) {
+        l1.setAttribute('visible', 'true');
+        l2.setAttribute('visible', 'false');
+        toast.innerHTML = "SWITCHING TO<br>LEVEL 1";
+    } else {
+        l1.setAttribute('visible', 'false');
+        l2.setAttribute('visible', 'true');
+        toast.innerHTML = "SWITCHING TO<br>LEVEL 2";
     }
+
+    // Trigger the center-screen zoom animation
+    toast.classList.add("show");
+    
+    setTimeout(function(){ 
+        toast.classList.remove("show"); 
+    }, 3000);
+}
 
 window.onload = function() {
         try {
@@ -72,33 +76,6 @@ window.onload = function() {
             console.error("Error pre-loading levels:", e);
         }
     };
-
-    function initLevel(lvl) {
-    const l1 = document.querySelector('#level1-group');
-    const l2 = document.querySelector('#level2-group');
-    const toast = document.querySelector('#level-toast');
-
-    // 1. Toggle visibility
-    if (lvl === 1) {
-        l1.setAttribute('visible', 'true');
-        l2.setAttribute('visible', 'false');
-        toast.innerHTML = "📍 Now at KICT Level 1";
-    } else {
-        l1.setAttribute('visible', 'false');
-        l2.setAttribute('visible', 'true');
-        toast.innerHTML = "📍 Now at KICT Level 2";
-    }
-
-    // 2. Trigger the Animation
-    toast.className = "show";
-    
-    // 3. Remove the class after 3 seconds so it can be played again
-    setTimeout(function(){ 
-        toast.className = toast.className.replace("show", ""); 
-    }, 3000);
-
-    console.log("Switched to Level " + lvl);
-}
 </script>
 </body>
 
