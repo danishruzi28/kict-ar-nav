@@ -83,14 +83,11 @@
     </div>
 
     <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam;
-            displayWidth: 1280; 
-            displayHeight: 720; 
-            canvasWidth: 1280; 
-            canvasHeight: 720; 
             detectionMode: mono_and_matrix; 
             matrixCodeType: 3x3; 
-            debugUIEnabled: false;"
-            renderer="logarithmicDepthBuffer: true; antialias: false; precision: medium;">
+            debugUIEnabled: false;
+            trackingMethod: best;"
+            device-orientation-permission-ui="enabled: false">
         <a-entity id="level1-group" visible="true"><a-entity id="l1-content"></a-entity></a-entity>
         <a-entity id="level2-group" visible="false"><a-entity id="l2-content"></a-entity></a-entity>
         <a-entity camera></a-entity>
@@ -112,7 +109,7 @@
             document.querySelector('#level2-group').setAttribute('visible', lvl === 2);
         }
 
-        // Update your setDestination function to include the resize fix
+        // Call this inside your showLevelRooms and setDestination functions
         function setDestination(target) {
             currentTarget = target;
             document.querySelector('#destination-menu').style.display = 'none';
@@ -121,8 +118,8 @@
             const toast = document.querySelector('#level-toast');
             toast.innerHTML = "Navigating to:<br>" + target;
             toast.classList.add("show");
-            setTimeout(forceResize, 300); 
             updateMarkers();
+            setTimeout(fixCamera, 500); // Wait for menu to vanish then fix camera
         }
 
         function resetToFloors() {
@@ -142,12 +139,12 @@
             setTimeout(() => { window.dispatchEvent(new Event('resize')); updateMarkers(); }, 1000);
         });
 
-        function forceResize() {
-        window.dispatchEvent(new Event('resize'));
-        const video = document.querySelector('video');
-            if (video) {
-                video.style.width = "100vw";
-                video.style.height = "100vh";
+        // Force the camera to recalculate every time the level or destination changes
+        function fixCamera() {
+        const scene = document.querySelector('a-scene');
+            if (scene && scene.systems.arjs) {
+            scene.systems.arjs.onResize();
+            console.log("AR.js Resize Triggered");
     }
 }
     </script>

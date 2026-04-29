@@ -9,25 +9,27 @@ html, body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* 2. AR Scene Fixes */
-/* This prevents the AR camera from covering the UI */
-.a-canvas {
-    z-index: 0 !important;
+/* Target the specific AR.js video wrapper */
+.arjs-loader {
+    display: none !important;
+}
+
+/* Force the video and its parent containers to be full screen */
+video, .a-canvas, .arjs-video {
     width: 100vw !important;
     height: 100vh !important;
     position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important; /* Centers and fills */
+    object-fit: cover !important;
+    margin: 0 !important;
 }
 
-video {
-    z-index: -1 !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover;
+/* Ensure nothing is clipping the view */
+.a-container {
+    width: 100vw !important;
+    height: 100vh !important;
 }
 
 /* 3. UI Overlay Container */
