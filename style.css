@@ -78,22 +78,32 @@ canvas.a-canvas {
 }
 
 #destination-menu {
-    position: fixed;
-    top: 20px; /* Move it higher */
-    left: 10px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    z-index: 9999 !important; /* Force to front */
-    pointer-events: auto !important; /* Make sure it's clickable */
+    gap: 10px;
 }
 
 .dest-btn {
-    padding: 10px;
-    background: #222;
+    padding: 12px 20px;
+    background: black;
     color: #00FFFF;
     border: 2px solid #00FFFF;
-    border-radius: 5px;
+    border-radius: 10px;
+    font-family: sans-serif;
+    font-weight: bold;
     font-size: 14px;
-    z-index: 10000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+/* Ensure AR.js video doesn't cover our UI */
+canvas.a-canvas {
+    z-index: 1 !important;
+}
+
+.a-enter-vr {
+    display: none !important;
 }

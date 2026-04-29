@@ -13,37 +13,25 @@
 </head>
 
 <body style="margin: 0; overflow: hidden;">
-
-    <div id="level-toast">System Ready</div>
-
-    <div class="nav-container">
-        <button class="nav-button" onclick="initLevel(1)">Level 1</button>
-        <button class="nav-button" onclick="initLevel(2)">Level 2</button>
-    </div>
-
-    <div id="destination-menu">
-    <button class="dest-btn" onclick="setDestination('Mens Toilet 1')">Mens Toilet 1</button>
-    <button class="dest-btn" onclick="setDestination('CITA Classroom')">CITA Classroom</button>
-    <button class="dest-btn" onclick="setDestination('LR6')">LR6</button>
-    <button class="dest-btn" onclick="setDestination('none')" style="background: #ff4444; border-color: white;">Clear</button>
-    </div>
-
-    <a-scene
-        embedded 
-        vr-mode-ui="enabled: false"
-        renderer="antialias: false; precision: medium;" 
-        arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; trackingMethod: best; maxDetectionRate: 30; debugUIEnabled: false;">
+    <div id="ui-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none;">
         
-        <a-entity id="level1-group" visible="false">
-        <a-entity id="l1-content"></a-entity>
-        </a-entity>
+        <div id="destination-menu" style="pointer-events: auto;">
+            <button class="dest-btn" onclick="setDestination('Mens Toilet 1')">Mens Toilet 1</button>
+            <button class="dest-btn" onclick="setDestination('CITA Classroom')">CITA Classroom</button>
+            <button class="dest-btn" onclick="setDestination('LR6')">LR6</button>
+            <button class="dest-btn" onclick="setDestination('none')" style="background: #ff4444;">Clear</button>
+        </div>
 
-        <a-entity id="level2-group" visible="false">
-        <a-entity id="l2-content"></a-entity>
-        </a-entity>
+        <div id="level-toast">System Ready</div>
+    </div>
 
+    <a-scene embedded vr-mode-ui="enabled: false" arjs="...">
+        <a-entity id="level1-group">
+            <a-entity id="l1-content"></a-entity>
+        </a-entity>
         <a-entity camera></a-entity>
     </a-scene>
+</body>
 
     <script>
         // Initialize the target at the very top
