@@ -46,43 +46,67 @@
     </a-scene>
 
     <script>
-    function initLevel(lvl) {
-    const l1 = document.querySelector('#level1-group');
-    const l2 = document.querySelector('#level2-group');
-    const toast = document.querySelector('#level-toast');
+        // Initialize the target at the very top
+var currentTarget = "none"; 
 
-    if (lvl === 1) {
-        l1.setAttribute('visible', 'true');
-        l2.setAttribute('visible', 'false');
-        toast.innerHTML = "SWITCHING TO<br>LEVEL 1";
-    } else {
-        l1.setAttribute('visible', 'false');
-        l2.setAttribute('visible', 'true');
-        toast.innerHTML = "SWITCHING TO<br>LEVEL 2";
-    }
-
-    // Trigger the center-screen zoom animation
-    toast.classList.add("show");
+function setDestination(target) {
+    console.log("Setting destination to: " + target);
+    currentTarget = target;
     
-    setTimeout(function(){ 
-        toast.classList.remove("show"); 
-    }, 3000);
+    // Refresh the content
+    const l1Content = document.querySelector('#l1-content');
+    if(l1Content) {
+        l1Content.innerHTML = loadLevel1();
+    }
 }
 
-window.onload = function() {
-        try {
-            const l1Content = document.querySelector('#l1-content');
-            const l2Content = document.querySelector('#l2-content');
+// This function makes sure the arrows are drawn the MOMENT the page loads
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const l1Content = document.querySelector('#l1-content');
+        if (l1Content && typeof loadLevel1 === "function") {
+            l1Content.innerHTML = loadLevel1();
+            console.log("Level 1 Arrows Initialized");
+        }
+    }, 2000); // Wait 2 seconds for AR.js to warm up
+});
+    //function initLevel(lvl) {
+    //const l1 = document.querySelector('#level1-group');
+    //const l2 = document.querySelector('#level2-group');
+    //const toast = document.querySelector('#level-toast');
+
+    //if (lvl === 1) {
+       //l1.setAttribute('visible', 'true');
+        //l2.setAttribute('visible', 'false');
+        //toast.innerHTML = "SWITCHING TO<br>LEVEL 1";
+   // } //else {
+     //   l1.setAttribute('visible', 'false');
+     //   l2.setAttribute('visible', 'true');
+      //  toast.innerHTML = "SWITCHING TO<br>LEVEL 2";
+   // }
+
+    // Trigger the center-screen zoom animation
+    //toast.classList.add("show");
+    
+   // setTimeout(function(){ 
+    //    toast.classList.remove("show"); 
+   // }, 3000);
+//}
+
+//window.onload = function() {
+       // try {
+          //  const l1Content = document.querySelector('#l1-content');
+          //  const l2Content = document.querySelector('#l2-content');
             
             // Inject HTML from your .js files ONLY ONCE
-            l1Content.innerHTML = loadLevel1();
-            l2Content.innerHTML = loadLevel2();
+          //  l1Content.innerHTML = loadLevel1();
+          //  l2Content.innerHTML = loadLevel2();
             
-            console.log("Assets pre-loaded to memory.");
-        } catch (e) {
-            console.error("Error pre-loading levels:", e);
-        }
-    };
+          //  console.log("Assets pre-loaded to memory.");
+        //} catch (e) {
+           // console.error("Error pre-loading levels:", e);
+       // }
+  //  };
 </script>
 </body>
 
