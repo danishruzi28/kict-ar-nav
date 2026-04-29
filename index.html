@@ -67,6 +67,19 @@
 
         <button class="dest-btn" onclick="setDestination('none')" style="background: #ff4444 !important; margin-top: 10px;">RESET</button>
     </div>
+    
+<div id="level2-rooms" style="display: none;">
+    <button class="dest-btn" onclick="setDestination('MPH')">MPH</button>
+    <button class="dest-btn" onclick="setDestination('Elevator 1')">Elevator 1</button>
+    <button class="dest-btn" onclick="setDestination('Elevator 2')">Elevator 2</button>
+    <button class="dest-btn" onclick="setDestination('LR 9')">LR 9</button>
+    <button class="dest-btn" onclick="setDestination('LR 10')">LR 10</button>
+    <button class="dest-btn" onclick="setDestination('LR 11')">LR 11</button>
+    <button class="dest-btn" onclick="setDestination('LR 12')">LR 12</button>
+    <button class="dest-btn" onclick="setDestination('LR 13')">LR 13</button>
+    <button class="dest-btn" onclick="setDestination('LR 14')">LR 14</button>
+    <button class="dest-btn" onclick="setDestination('LR 14A')">LR 14A</button>
+</div>
 
     <div id="level-toast">System Ready</div>
 </div>
@@ -89,57 +102,28 @@
     </a-scene>
 
     <script>
-        var currentTarget = "none";
-        var currentLevel = 1;
+      // In your Script section
+function setDestination(target) {
+    currentTarget = target;
+    
+    // 1. Show the toast
+    const toast = document.querySelector('#level-toast');
+    toast.innerHTML = "Navigating to:<br>" + target;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3000);
 
-        // Function to set destination and update arrows
-        function setDestination(target) {
-            currentTarget = target;
-            
-            // Show toast reminder
-            const toast = document.querySelector('#level-toast');
-            toast.innerHTML = target === "none" ? "Navigation Cleared" : "Navigating to:<br>" + target;
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 3000);
+    // 2. HIDE THE MENU (To clear the screen as you requested)
+    document.querySelector('#destination-menu').style.display = 'none';
+    
+    // 3. Show a "Back/Reset" button somewhere small if they get lost
+    document.querySelector('#reset-nav-btn').style.display = 'block';
 
-            // Re-render markers to update directions
-            updateMarkers();
-        }
+    updateMarkers();
+}
 
-        // Function to switch between Level 1 and Level 2
-        function changeLevel(lvl) {
-            currentLevel = lvl;
-            const l1 = document.querySelector('#level1-group');
-            const l2 = document.querySelector('#level2-group');
-
-            if (lvl === 1) {
-                l1.setAttribute('visible', 'true');
-                l2.setAttribute('visible', 'false');
-            } else {
-                l1.setAttribute('visible', 'false');
-                l2.setAttribute('visible', 'true');
-            }
-            updateMarkers();
-        }
-
-        // Helper to refresh HTML inside the level containers
-        function updateMarkers() {
-            try {
-                document.querySelector('#l1-content').innerHTML = typeof loadLevel1 === "function" ? loadLevel1() : "";
-                document.querySelector('#l2-content').innerHTML = typeof loadLevel2 === "function" ? loadLevel2() : "";
-            } catch (e) {
-                console.error("Error updating markers: ", e);
-            }
-        }
-
-        // Initialization on Load
-        window.addEventListener('load', () => {
-            // Fill markers initially
-            setTimeout(() => {
-                updateMarkers();
-                // Force camera resize fix
-                window.dispatchEvent(new Event('resize'));
-            }, 1500);
-        });
+function showMenu() {
+    document.querySelector('#destination-menu').style.display = 'block';
+    document.querySelector('#reset-nav-btn').style.display = 'none';
+}
     </script>
 </body>
