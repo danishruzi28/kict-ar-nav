@@ -12,89 +12,94 @@
     <script src="level2.js"></script>
 </head>
 
-<body style="margin: 0; overflow: hidden;">
-    <div id="ui-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none;">
+<body style="margin: 0; overflow: hidden; background-color: transparent;">
+
+    <div id="ui-overlay">
         
-        <div id="destination-menu" style="pointer-events: auto;">
+        <div id="destination-menu">
             <button class="dest-btn" onclick="setDestination('Mens Toilet 1')">Mens Toilet 1</button>
             <button class="dest-btn" onclick="setDestination('CITA Classroom')">CITA Classroom</button>
             <button class="dest-btn" onclick="setDestination('LR6')">LR6</button>
-            <button class="dest-btn" onclick="setDestination('none')" style="background: #ff4444;">Clear</button>
+            <button class="dest-btn" onclick="setDestination('none')" style="background: #ff4444; color: white; border-color: white;">Clear Nav</button>
         </div>
 
         <div id="level-toast">System Ready</div>
+
+        <div class="nav-container" style="position: fixed; bottom: 20px; width: 100%; display: flex; justify-content: center; gap: 20px; pointer-events: auto;">
+            <button class="nav-button" onclick="changeLevel(1)">Level 1</button>
+            <button class="nav-button" onclick="changeLevel(2)">Level 2</button>
+        </div>
     </div>
 
-    <a-scene embedded vr-mode-ui="enabled: false" arjs="...">
-        <a-entity id="level1-group">
+    <a-scene 
+        embedded 
+        vr-mode-ui="enabled: false"
+        arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;"
+        renderer="logarithmicDepthBuffer: true; antialias: false; precision: medium;">
+        
+        <a-entity id="level1-group" visible="true">
             <a-entity id="l1-content"></a-entity>
         </a-entity>
+
+        <a-entity id="level2-group" visible="false">
+            <a-entity id="l2-content"></a-entity>
+        </a-entity>
+
         <a-entity camera></a-entity>
     </a-scene>
-</body>
 
     <script>
-        // Initialize the target at the very top
-var currentTarget = "none"; 
+        var currentTarget = "none";
+        var currentLevel = 1;
 
-function setDestination(target) {
-    console.log("Setting destination to: " + target);
-    currentTarget = target;
-    
-    // Refresh the content
-    const l1Content = document.querySelector('#l1-content');
-    if(l1Content) {
-        l1Content.innerHTML = loadLevel1();
-    }
-}
+        // Function to set destination and update arrows
+        function setDestination(target) {
+            currentTarget = target;
+            
+            // Show toast reminder
+            const toast = document.querySelector('#level-toast');
+            toast.innerHTML = target === "none" ? "Navigation Cleared" : "Navigating to:<br>" + target;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
 
-// This function makes sure the arrows are drawn the MOMENT the page loads
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const l1Content = document.querySelector('#l1-content');
-        if (l1Content && typeof loadLevel1 === "function") {
-            l1Content.innerHTML = loadLevel1();
-            console.log("Level 1 Arrows Initialized");
+            // Re-render markers to update directions
+            updateMarkers();
         }
-    }, 2000); // Wait 2 seconds for AR.js to warm up
-});
-    //function initLevel(lvl) {
-    //const l1 = document.querySelector('#level1-group');
-    //const l2 = document.querySelector('#level2-group');
-    //const toast = document.querySelector('#level-toast');
 
-    //if (lvl === 1) {
-       //l1.setAttribute('visible', 'true');
-        //l2.setAttribute('visible', 'false');
-        //toast.innerHTML = "SWITCHING TO<br>LEVEL 1";
-   // } //else {
-     //   l1.setAttribute('visible', 'false');
-     //   l2.setAttribute('visible', 'true');
-      //  toast.innerHTML = "SWITCHING TO<br>LEVEL 2";
-   // }
+        // Function to switch between Level 1 and Level 2
+        function changeLevel(lvl) {
+            currentLevel = lvl;
+            const l1 = document.querySelector('#level1-group');
+            const l2 = document.querySelector('#level2-group');
 
-    // Trigger the center-screen zoom animation
-    //toast.classList.add("show");
-    
-   // setTimeout(function(){ 
-    //    toast.classList.remove("show"); 
-   // }, 3000);
-//}
+            if (lvl === 1) {
+                l1.setAttribute('visible', 'true');
+                l2.setAttribute('visible', 'false');
+            } else {
+                l1.setAttribute('visible', 'false');
+                l2.setAttribute('visible', 'true');
+            }
+            updateMarkers();
+        }
 
-//window.onload = function() {
-       // try {
-          //  const l1Content = document.querySelector('#l1-content');
-          //  const l2Content = document.querySelector('#l2-content');
-            
-            // Inject HTML from your .js files ONLY ONCE
-          //  l1Content.innerHTML = loadLevel1();
-          //  l2Content.innerHTML = loadLevel2();
-            
-          //  console.log("Assets pre-loaded to memory.");
-        //} catch (e) {
-           // console.error("Error pre-loading levels:", e);
-       // }
-  //  };
-</script>
+        // Helper to refresh HTML inside the level containers
+        function updateMarkers() {
+            try {
+                document.querySelector('#l1-content').innerHTML = typeof loadLevel1 === "function" ? loadLevel1() : "";
+                document.querySelector('#l2-content').innerHTML = typeof loadLevel2 === "function" ? loadLevel2() : "";
+            } catch (e) {
+                console.error("Error updating markers: ", e);
+            }
+        }
+
+        // Initialization on Load
+        window.addEventListener('load', () => {
+            // Fill markers initially
+            setTimeout(() => {
+                updateMarkers();
+                // Force camera resize fix
+                window.dispatchEvent(new Event('resize'));
+            }, 1500);
+        });
+    </script>
 </body>
-
