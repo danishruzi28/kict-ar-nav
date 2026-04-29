@@ -14,116 +14,123 @@
 
 <body style="margin: 0; overflow: hidden; background-color: transparent;">
 
-<div id="ui-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none;">
-    
-    <div id="destination-menu" style="
-        position: absolute; 
-        top: 10px; 
-        left: 10px; 
-        width: 140px !important; 
-        height: 250px !important; 
-        overflow-y: scroll !important; 
-        background: rgba(0, 0, 0, 0.8) !important; 
-        border: 2px solid #00FFFF !important; 
-        border-radius: 10px; 
-        padding: 10px; 
-        pointer-events: auto !important;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling for iPhone */
-    ">
-        <div style="color: #00FFFF; font-size: 10px; text-align: center; margin-bottom: 8px; font-family: sans-serif; letter-spacing: 1px;">GO TO:</div>
+    <div id="ui-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none;">
         
-        <button class="dest-btn" onclick="setDestination('Elevator')">Elevator</button>
-        <button class="dest-btn" onclick="setDestination('Mens Toilet 1')">Mens Toilet 1</button>
-        <button class="dest-btn" onclick="setDestination('Ladies Toilet 2')">Ladies Toilet 2</button>
-        <button class="dest-btn" onclick="setDestination('Sink 1')">Sink 1</button>
-        <button class="dest-btn" onclick="setDestination('Sink 2')">Sink 2</button>
-        <button class="dest-btn" onclick="setDestination('Print')">Print Shop</button>
-        <button class="dest-btn" onclick="setDestination('Coop')">Coop</button>
-        <button class="dest-btn" onclick="setDestination('CITA Lecture Room')">CITA Lecture</button>
-        <button class="dest-btn" onclick="setDestination('CITA Classroom')">CITA Class</button>
-        <button class="dest-btn" onclick="setDestination('CITA Lab')">CITA Lab</button>
-        <button class="dest-btn" onclick="setDestination('LR1')">LR1</button>
-        <button class="dest-btn" onclick="setDestination('LR2')">LR2</button>
-        <button class="dest-btn" onclick="setDestination('LR3')">LR3</button>
-        <button class="dest-btn" onclick="setDestination('LR4')">LR4</button>
-        <button class="dest-btn" onclick="setDestination('LR5')">LR5</button>
-        <button class="dest-btn" onclick="setDestination('LR6')">LR6</button>
-        <button class="dest-btn" onclick="setDestination('Cafe 1')">Cafe 1</button>
-        <button class="dest-btn" onclick="setDestination('Cafe 2')">Cafe 2</button>
-        <button class="dest-btn" onclick="setDestination('Cafe 3')">Cafe 3</button>
-        <button class="dest-btn" onclick="setDestination('Student Lounge Male')">Lounge (M)</button>
-        <button class="dest-btn" onclick="setDestination('Student Lounge Female')">Lounge (F)</button>
-        <button class="dest-btn" onclick="setDestination('ICTSS')">ICTSS</button>
-        <button class="dest-btn" onclick="setDestination('TL-C1-01')">TL-C1-01</button>
-        <button class="dest-btn" onclick="setDestination('TL-C1-02')">TL-C1-02</button>
-        <button class="dest-btn" onclick="setDestination('TL-C1-03')">TL-C1-03</button>
-        <button class="dest-btn" onclick="setDestination('TL-C1-04')">TL-C1-04</button>
-        <button class="dest-btn" onclick="setDestination('Stairs 1')">Stairs 1</button>
-        <button class="dest-btn" onclick="setDestination('Stairs 2')">Stairs 2</button>
-        <button class="dest-btn" onclick="setDestination('Stairs 3')">Stairs 3</button>
-        <button class="dest-btn" onclick="setDestination('Stairs 4')">Stairs 4</button>
-        <button class="dest-btn" onclick="setDestination('Stairs 5')">Stairs 5</button>
-        <button class="dest-btn" onclick="setDestination('Stairs 6')">Stairs 6</button>
+        <div id="floor-menu" style="position: absolute; top: 20px; left: 10px; pointer-events: auto; display: flex; gap: 10px;">
+            <button class="dest-btn" onclick="showLevelRooms(1)" style="background: #00FFFF; color: black; padding: 15px;">LEVEL 1</button>
+            <button class="dest-btn" onclick="showLevelRooms(2)" style="background: #00FFFF; color: black; padding: 15px;">LEVEL 2</button>
+        </div>
 
-        <button class="dest-btn" onclick="setDestination('none')" style="background: #ff4444 !important; margin-top: 10px;">RESET</button>
+        <div id="destination-menu" style="display: none; position: absolute; top: 80px; left: 10px; width: 160px; height: 350px; overflow-y: auto; background: rgba(0,0,0,0.85); border: 2px solid #00FFFF; border-radius: 10px; padding: 10px; pointer-events: auto;">
+            
+            <div id="level-1-list" style="display: none;">
+                <div style="color: #00FFFF; font-size: 11px; text-align: center; margin-bottom: 10px;">L1 ROOMS</div>
+                <button class="dest-btn" onclick="setDestination('Sink 1')">Sink 1</button>
+                <button class="dest-btn" onclick="setDestination('Sink 2')">Sink 2</button>
+                <button class="dest-btn" onclick="setDestination('Cafe 1')">Cafe 1</button>
+                <button class="dest-btn" onclick="setDestination('Cafe 2')">Cafe 2</button>
+                <button class="dest-btn" onclick="setDestination('Cafe 3')">Cafe 3</button>
+                <button class="dest-btn" onclick="setDestination('Mens Toilet 1')">Mens Toilet 1</button>
+                <button class="dest-btn" onclick="setDestination('Ladies Toilet 2')">Ladies Toilet 2</button>
+                <button class="dest-btn" onclick="setDestination('Print')">Print</button>
+                <button class="dest-btn" onclick="setDestination('Coop')">Coop</button>
+                <button class="dest-btn" onclick="setDestination('Stairs 1')">Stairs 1</button>
+                <button class="dest-btn" onclick="setDestination('CITA Lecture Room')">CITA Lecture</button>
+                <button class="dest-btn" onclick="setDestination('CITA Classroom')">CITA Class</button>
+                <button class="dest-btn" onclick="setDestination('CITA Lab')">CITA Lab</button>
+                <button class="dest-btn" onclick="setDestination('LR1')">LR1</button>
+                <button class="dest-btn" onclick="setDestination('LR2')">LR2</button>
+                <button class="dest-btn" onclick="setDestination('LR3')">LR3</button>
+                <button class="dest-btn" onclick="setDestination('LR4')">LR4</button>
+                <button class="dest-btn" onclick="setDestination('LR5')">LR5</button>
+                <button class="dest-btn" onclick="setDestination('LR6')">LR6</button>
+                <button class="dest-btn" onclick="setDestination('ICTSS')">ICTSS</button>
+                <button class="dest-btn" onclick="setDestination('Student Lounge Male')">Lounge (M)</button>
+                <button class="dest-btn" onclick="setDestination('Student Lounge Female')">Lounge (F)</button>
+                <button class="dest-btn" onclick="setDestination('TL-C1-01')">TL-C1-01</button>
+                <button class="dest-btn" onclick="setDestination('TL-C1-02')">TL-C1-02</button>
+                <button class="dest-btn" onclick="setDestination('TL-C1-03')">TL-C1-03</button>
+                <button class="dest-btn" onclick="setDestination('TL-C1-04')">TL-C1-04</button>
+                <button class="dest-btn" onclick="setDestination('Elevator')">Elevator</button>
+            </div>
+
+            <div id="level-2-list" style="display: none;">
+                <div style="color: #00FFFF; font-size: 11px; text-align: center; margin-bottom: 10px;">L2 ROOMS</div>
+                <button class="dest-btn" onclick="setDestination('MPH')">MPH</button>
+                <button class="dest-btn" onclick="setDestination('Elevator 1')">Elevator 1</button>
+                <button class="dest-btn" onclick="setDestination('Elevator 2')">Elevator 2</button>
+                <button class="dest-btn" onclick="setDestination('LR 9')">LR 9</button>
+                <button class="dest-btn" onclick="setDestination('LR 10')">LR 10</button>
+                <button class="dest-btn" onclick="setDestination('LR 11')">LR 11</button>
+                <button class="dest-btn" onclick="setDestination('LR 12')">LR 12</button>
+                <button class="dest-btn" onclick="setDestination('LR 13')">LR 13</button>
+                <button class="dest-btn" onclick="setDestination('LR 14')">LR 14</button>
+                <button class="dest-btn" onclick="setDestination('LR 14A')">LR 14A</button>
+                <button class="dest-btn" onclick="setDestination('Stairs 1')">Stairs 1</button>
+                <button class="dest-btn" onclick="setDestination('Stairs 2')">Stairs 2</button>
+                <button class="dest-btn" onclick="setDestination('Stairs 3')">Stairs 3</button>
+                <button class="dest-btn" onclick="setDestination('Stairs 4')">Stairs 4</button>
+                <button class="dest-btn" onclick="setDestination('Stairs 5')">Stairs 5</button>
+                <button class="dest-btn" onclick="setDestination('Stairs 6')">Stairs 6</button>
+            </div>
+            
+            <button class="dest-btn" onclick="resetToFloors()" style="background: #444; margin-top: 10px; border: none;">⬅ BACK</button>
+        </div>
+
+        <button id="back-to-menu-btn" onclick="resetToFloors()" style="display: none; position: fixed; bottom: 30px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: #00FFFF; color: black; font-weight: bold; border: none; z-index: 10000; pointer-events: auto; box-shadow: 0 0 15px #00FFFF;">MENU</button>
+
+        <div id="level-toast">System Ready</div>
     </div>
-    
-<div id="level2-rooms" style="display: none;">
-    <button class="dest-btn" onclick="setDestination('MPH')">MPH</button>
-    <button class="dest-btn" onclick="setDestination('Elevator 1')">Elevator 1</button>
-    <button class="dest-btn" onclick="setDestination('Elevator 2')">Elevator 2</button>
-    <button class="dest-btn" onclick="setDestination('LR 9')">LR 9</button>
-    <button class="dest-btn" onclick="setDestination('LR 10')">LR 10</button>
-    <button class="dest-btn" onclick="setDestination('LR 11')">LR 11</button>
-    <button class="dest-btn" onclick="setDestination('LR 12')">LR 12</button>
-    <button class="dest-btn" onclick="setDestination('LR 13')">LR 13</button>
-    <button class="dest-btn" onclick="setDestination('LR 14')">LR 14</button>
-    <button class="dest-btn" onclick="setDestination('LR 14A')">LR 14A</button>
-</div>
 
-    <div id="level-toast">System Ready</div>
-</div>
-
-    <a-scene 
-        embedded 
-        vr-mode-ui="enabled: false"
-        arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;"
-        renderer="logarithmicDepthBuffer: true; antialias: false; precision: medium;">
-        
-        <a-entity id="level1-group" visible="true">
-            <a-entity id="l1-content"></a-entity>
-        </a-entity>
-
-        <a-entity id="level2-group" visible="false">
-            <a-entity id="l2-content"></a-entity>
-        </a-entity>
-
+    <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;">
+        <a-entity id="level1-group" visible="true"><a-entity id="l1-content"></a-entity></a-entity>
+        <a-entity id="level2-group" visible="false"><a-entity id="l2-content"></a-entity></a-entity>
         <a-entity camera></a-entity>
     </a-scene>
 
     <script>
-      // In your Script section
-function setDestination(target) {
-    currentTarget = target;
-    
-    // 1. Show the toast
-    const toast = document.querySelector('#level-toast');
-    toast.innerHTML = "Navigating to:<br>" + target;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 3000);
+        let currentTarget = "none";
+        let currentLevel = 1;
 
-    // 2. HIDE THE MENU (To clear the screen as you requested)
-    document.querySelector('#destination-menu').style.display = 'none';
-    
-    // 3. Show a "Back/Reset" button somewhere small if they get lost
-    document.querySelector('#reset-nav-btn').style.display = 'block';
+        function showLevelRooms(lvl) {
+            currentLevel = lvl;
+            document.querySelector('#floor-menu').style.display = 'none';
+            document.querySelector('#destination-menu').style.display = 'block';
+            document.querySelector('#level-1-list').style.display = (lvl === 1) ? 'block' : 'none';
+            document.querySelector('#level-2-list').style.display = (lvl === 2) ? 'block' : 'none';
+            
+            // Switch AR layers
+            document.querySelector('#level1-group').setAttribute('visible', lvl === 1);
+            document.querySelector('#level2-group').setAttribute('visible', lvl === 2);
+        }
 
-    updateMarkers();
-}
+        function setDestination(target) {
+            currentTarget = target;
+            document.querySelector('#destination-menu').style.display = 'none';
+            document.querySelector('#back-to-menu-btn').style.display = 'block';
 
-function showMenu() {
-    document.querySelector('#destination-menu').style.display = 'block';
-    document.querySelector('#reset-nav-btn').style.display = 'none';
-}
+            const toast = document.querySelector('#level-toast');
+            toast.innerHTML = "Navigating to:<br>" + target;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+            updateMarkers();
+        }
+
+        function resetToFloors() {
+            currentTarget = "none";
+            document.querySelector('#floor-menu').style.display = 'flex';
+            document.querySelector('#destination-menu').style.display = 'none';
+            document.querySelector('#back-to-menu-btn').style.display = 'none';
+            updateMarkers();
+        }
+
+        function updateMarkers() {
+            if (typeof loadLevel1 === "function") document.querySelector('#l1-content').innerHTML = loadLevel1();
+            if (typeof loadLevel2 === "function") document.querySelector('#l2-content').innerHTML = loadLevel2();
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => { window.dispatchEvent(new Event('resize')); updateMarkers(); }, 1000);
+        });
     </script>
 </body>
