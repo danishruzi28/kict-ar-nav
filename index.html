@@ -82,7 +82,14 @@
         <div id="level-toast">System Ready</div>
     </div>
 
-    <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;">
+    <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam;
+            displayWidth: 1280; 
+            displayHeight: 720; 
+            canvasWidth: 1280; 
+            canvasHeight: 720; 
+            detectionMode: mono_and_matrix; 
+            matrixCodeType: 3x3; 
+            debugUIEnabled: false;">
         <a-entity id="level1-group" visible="true"><a-entity id="l1-content"></a-entity></a-entity>
         <a-entity id="level2-group" visible="false"><a-entity id="l2-content"></a-entity></a-entity>
         <a-entity camera></a-entity>
@@ -104,6 +111,7 @@
             document.querySelector('#level2-group').setAttribute('visible', lvl === 2);
         }
 
+        // Update your setDestination function to include the resize fix
         function setDestination(target) {
             currentTarget = target;
             document.querySelector('#destination-menu').style.display = 'none';
@@ -112,7 +120,7 @@
             const toast = document.querySelector('#level-toast');
             toast.innerHTML = "Navigating to:<br>" + target;
             toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 3000);
+            setTimeout(forceResize, 300); 
             updateMarkers();
         }
 
@@ -132,5 +140,14 @@
         window.addEventListener('load', () => {
             setTimeout(() => { window.dispatchEvent(new Event('resize')); updateMarkers(); }, 1000);
         });
+
+        function forceResize() {
+        window.dispatchEvent(new Event('resize'));
+        const video = document.querySelector('video');
+            if (video) {
+                video.style.width = "100vw";
+                video.style.height = "100vh";
+    }
+}
     </script>
 </body>
