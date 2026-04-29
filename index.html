@@ -16,19 +16,50 @@
 
     <div id="ui-overlay">
         
-        <div id="destination-menu">
-            <button class="dest-btn" onclick="setDestination('Mens Toilet 1')">Mens Toilet 1</button>
-            <button class="dest-btn" onclick="setDestination('CITA Classroom')">CITA Classroom</button>
-            <button class="dest-btn" onclick="setDestination('LR6')">LR6</button>
-            <button class="dest-btn" onclick="setDestination('none')" style="background: #ff4444; color: white; border-color: white;">Clear Nav</button>
-        </div>
+        <div id="destination-menu" style="max-height: 70vh; overflow-y: auto; background: rgba(0,0,0,0.6); padding: 10px; border-radius: 10px;">
+    <h3 style="color: #00FFFF; margin: 5px 0; font-family: sans-serif; font-size: 14px;">KICT LEVEL 1</h3>
+    
+    <button class="dest-btn" onclick="setDestination('Elevator')">Elevator 🛗</button>
+    <button class="dest-btn" onclick="setDestination('Mens Toilet 1')">Mens Toilet 1 🚹</button>
+    <button class="dest-btn" onclick="setDestination('Ladies Toilet 2')">Ladies Toilet 2 🚺</button>
+    <button class="dest-btn" onclick="setDestination('Sink 1')">Sink 1</button>
+    <button class="dest-btn" onclick="setDestination('Sink 2')">Sink 2</button>
+    
+    <button class="dest-btn" onclick="setDestination('Cafe 1')">Cafe 1</button>
+    <button class="dest-btn" onclick="setDestination('Cafe 2')">Cafe 2</button>
+    <button class="dest-btn" onclick="setDestination('Cafe 3')">Cafe 3</button>
+    <button class="dest-btn" onclick="setDestination('Print')">Print Shop</button>
+    <button class="dest-btn" onclick="setDestination('Coop')">Coop</button>
+    
+    <button class="dest-btn" onclick="setDestination('CITA Lecture Room')">CITA Lecture Room</button>
+    <button class="dest-btn" onclick="setDestination('CITA Classroom')">CITA Classroom</button>
+    <button class="dest-btn" onclick="setDestination('CITA Lab')">CITA Lab</button>
+    
+    <button class="dest-btn" onclick="setDestination('LR1')">LR1</button>
+    <button class="dest-btn" onclick="setDestination('LR2')">LR2</button>
+    <button class="dest-btn" onclick="setDestination('LR3')">LR3</button>
+    <button class="dest-btn" onclick="setDestination('LR4')">LR4</button>
+    <button class="dest-btn" onclick="setDestination('LR5')">LR5</button>
+    <button class="dest-btn" onclick="setDestination('LR6')">LR6</button>
+    
+    <button class="dest-btn" onclick="setDestination('ICTSS')">ICTSS</button>
+    <button class="dest-btn" onclick="setDestination('Student Lounge Male')">Student Lounge (M)</button>
+    <button class="dest-btn" onclick="setDestination('Student Lounge Female')">Student Lounge (F)</button>
+    
+    <button class="dest-btn" onclick="setDestination('TL-C1-01')">TL-C1-01</button>
+    <button class="dest-btn" onclick="setDestination('TL-C1-02')">TL-C1-02</button>
+    <button class="dest-btn" onclick="setDestination('TL-C1-03')">TL-C1-03</button>
+    <button class="dest-btn" onclick="setDestination('TL-C1-04')">TL-C1-04</button>
 
-        <div id="level-toast">System Ready</div>
+    <button class="dest-btn" onclick="setDestination('Stairs 1')">Stairs 1</button>
+    <button class="dest-btn" onclick="setDestination('Stairs 2')">Stairs 2</button>
+    <button class="dest-btn" onclick="setDestination('Stairs 3')">Stairs 3</button>
+    <button class="dest-btn" onclick="setDestination('Stairs 4')">Stairs 4</button>
+    <button class="dest-btn" onclick="setDestination('Stairs 5')">Stairs 5</button>
+    <button class="dest-btn" onclick="setDestination('Stairs 6')">Stairs 6</button>
 
-        <div class="nav-container" style="position: fixed; bottom: 20px; width: 100%; display: flex; justify-content: center; gap: 20px; pointer-events: auto;">
-            <button class="nav-button" onclick="changeLevel(1)">Level 1</button>
-            <button class="nav-button" onclick="changeLevel(2)">Level 2</button>
-        </div>
+    <button class="dest-btn" onclick="setDestination('none')" style="background: #ff4444; margin-top: 10px;">RESET</button>
+</div>
     </div>
 
     <a-scene 
