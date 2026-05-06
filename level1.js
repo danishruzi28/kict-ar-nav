@@ -11,7 +11,7 @@ function loadLevel1() {
             
         // At LR 5 (Marker 2), Arrival Effect
         marker2Content = `
-            <a-text value="ARRIVED: SCAN TO CONFIRM" position="0 1.8 0" align="center" color="#00FF00" look-at="[camera]"></a-text>
+            <a-text value="YOU HAVE ARRIVED YOUR DESTINATION" position="0 1.8 0" align="center" color="#00FF00" look-at="[camera]"></a-text>
             <a-entity geometry="primitive: sphere" material="color: gold" animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; loop: true"></a-entity>`;
 
     // NAVIGATION TO LOBBY (If they start elsewhere)

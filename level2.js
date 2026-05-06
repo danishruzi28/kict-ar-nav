@@ -9,7 +9,7 @@ function loadLevel2() {
             <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 -90 0"></a-entity>`;
         // At MPH (Marker 11), Arrival Effect
         marker11Content = `
-            <a-text value="ARRIVED: SCAN TO CONFIRM" position="0 1.8 0" align="center" color="#00FF00" look-at="[camera]"></a-text>
+            <a-text value="YOU HAVE ARRIVED YOUR DESTINATION" position="0 1.8 0" align="center" color="#00FF00" look-at="[camera]"></a-text>
             <a-entity geometry="primitive: sphere" material="color: gold" animation="property: scale; to: 1.1 1.1 1.1; dir: alternate; loop: true"></a-entity>`;
     }
 
