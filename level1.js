@@ -17,8 +17,14 @@ function loadLevel1() {
     // NAVIGATION TO LOBBY (If they start elsewhere)
     if (currentTarget === "Lobby") {
         marker1Content = `
-            <a-text value="YOU ARE AT LOBBY" position="0 1.8 0" align="center" color="#00FF00" look-at="[camera]"></a-text>
-            <a-entity geometry="primitive: sphere" material="color: gold" animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; loop: true"></a-entity>`;
+    <!-- Lifted 1.5 meters high (Y-axis) -->
+    <a-entity position="0 1.5 0">
+        <a-text value="YOU ARE AT: LOBBY" align="center" color="#00FF00" scale="2 2 2" look-at="[camera]"></a-text>
+    </a-entity>
+    
+    <!-- A large gold ball to make it obvious -->
+    <a-sphere position="0 0.5 0" radius="0.3" color="gold" animation="property: position; to: 0 0.8 0; dir: alternate; dur: 1000; loop: true"></a-sphere>
+`;
     }
 
     return `
