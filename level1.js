@@ -7,7 +7,7 @@ function loadLevel1() {
         // At Lobby (Marker 1), point toward LR 5
         marker1Content =`
             <a-text value="TURN RIGHT FOR LR 5" position="0 1.5 0" align="center" color="#00FFFF" look-at="[camera]"></a-text>
-            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 90 0"></a-entity>`;
+            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 -90 0"></a-entity>`;
             
         // At LR 5 (Marker 2), Arrival Effect
         marker2Content = `
