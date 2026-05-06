@@ -5,13 +5,12 @@ function loadLevel2() {
     if (currentTarget === "MPH") {
         // At Landing (Marker 10), point to MPH
         marker10Content = `
-            <a-text value="TO MPH (L2)" position="0 1.5 0" align="center" color="#00FFFF"></a-text>
-            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 90 0"></a-entity>`;
-
+            <a-text value="TURN LEFT FOR MPH" position="0 1.5 0" align="center" color="#00FFFF" look-at="[camera]"></a-text>
+            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 -90 0"></a-entity>`;
         // At MPH (Marker 11), Arrival Effect
         marker11Content = `
-            <a-text value="ARRIVED AT MPH" position="0 1.8 0" align="center" color="#00FF00"></a-text>
-            <a-entity geometry="primitive: sphere" material="color: gold" animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; loop: true"></a-entity>`;
+            <a-text value="ARRIVED: SCAN TO CONFIRM" position="0 1.8 0" align="center" color="#00FF00" look-at="[camera]"></a-text>
+            <a-entity geometry="primitive: sphere" material="color: gold" animation="property: scale; to: 1.1 1.1 1.1; dir: alternate; loop: true"></a-entity>`;
     }
 
     return `
