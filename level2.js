@@ -1,25 +1,21 @@
 function loadLevel2() {
-let m9Content = ""; // Content for LR 9 Marker
-    let m_start = "";   // Content for Starting Marker (e.g., Stairs/Elevator)
+    let marker10Content = ""; // Level 2 Landing
+    let marker11Content = ""; // MPH Marker
 
-    // Example: User is at Elevator 1 (Barcode 10) and wants LR 9
-    if (currentTarget === "LR 9") {
-        // STARTING POINT
-        m_start = `
-            <a-text value="GO TO LR 9" position="0 1.5 0" align="center" color="#00FFFF"></a-text>
-            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 0 0"></a-entity>
-        `;
+    if (currentTarget === "MPH") {
+        // At Landing (Marker 10), point to MPH
+        marker10Content = `
+            <a-text value="TO MPH (L2)" position="0 1.5 0" align="center" color="#00FFFF"></a-text>
+            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 90 0"></a-entity>`;
 
-        // ARRIVAL POINT (Barcode 11 is outside LR 9)
-        m9Content = `
-            <a-text value="SCAN TO CONFIRM ARRIVAL" position="0 1.8 0" align="center" color="#FFD700" animation="property: opacity; from: 1; to: 0.2; loop: true; dur: 800"></a-text>
-            <a-text value="LR 9" position="0 1.4 0" align="center" color="#FFFFFF"></a-text>
-            <a-entity geometry="primitive: box" material="color: gold" animation="property: rotation; to: 0 360 0; loop: true; dur: 4000"></a-entity>
-        `;
+        // At MPH (Marker 11), Arrival Effect
+        marker11Content = `
+            <a-text value="ARRIVED AT MPH" position="0 1.8 0" align="center" color="#00FF00"></a-text>
+            <a-entity geometry="primitive: sphere" material="color: gold" animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; loop: true"></a-entity>`;
     }
 
     return `
-        <a-marker type="barcode" value="10">${m_start}</a-marker>
-        <a-marker type="barcode" value="11">${m9Content}</a-marker>
+        <a-marker type="barcode" value="10">${marker10Content}</a-marker>
+        <a-marker type="barcode" value="11">${marker11Content}</a-marker>
     `;
 }
