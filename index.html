@@ -92,11 +92,20 @@
             updateMarkers();
         }
 
-        function updateMarkers() {
-            if (typeof loadLevel1 === "function") document.querySelector('#l1-content').innerHTML = loadLevel1();
-            if (typeof loadLevel2 === "function") document.querySelector('#l2-content').innerHTML = loadLevel2();
-        }
-
+     function updateMarkers() {
+    // This looks at level1.js, gets the HTML for all 5 markers, 
+    // and puts it inside the l1-content entity.
+    const l1Content = document.querySelector('#l1-content');
+    if (typeof loadLevel1 === "function") {
+        l1Content.innerHTML = loadLevel1();
+    }
+    
+    // Do the same for Level 2 if needed
+    const l2Content = document.querySelector('#l2-content');
+    if (typeof loadLevel2 === "function") {
+        l2Content.innerHTML = loadLevel2();
+    }
+}
         window.addEventListener('load', () => {
             setTimeout(() => { window.dispatchEvent(new Event('resize')); updateMarkers(); }, 1000);
         });
