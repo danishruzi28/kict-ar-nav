@@ -1,35 +1,39 @@
 function loadLevel1() {
-    let marker1Content = ""; // Lobby Marker
-    let marker2Content = ""; // LR 5 Marker
+    let m1="", m2="", m3="", m4="", m5="";
 
-    // NAVIGATION TO LR 5
     if (currentTarget === "LR 5") {
-        // At Lobby (Marker 1), point toward LR 5
-        marker1Content =`
-            <a-text value="TURN RIGHT FOR LR 5" position="0 1.5 0" align="center" color="#000000" look-at="[camera]"></a-text>
-            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 -90 0"></a-entity>`;
-            
-        // At LR 5 (Marker 2), Arrival Effect
-        marker2Content = `
-            <a-text value="YOU HAVE ARRIVED YOUR DESTINATION" position="0 1.8 0" align="center" color="#fffb00" look-at="[camera]"></a-text>
-            <a-entity geometry="primitive: sphere" material="color: gold" animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; loop: true"></a-entity>`;
+        // --- MARKER 1: LOBBY ---
+        m1 = `
+            <a-text value="TURN LEFT AND GO TO JUNCTION 1" position="0 1.5 0" align="center" color="#00FFFF" look-at="[camera]"></a-text>
+            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 0 0"></a-entity>`;
 
-    // NAVIGATION TO LOBBY (If they start elsewhere)
-    if (currentTarget === "Lobby") {
-        marker1Content = `
-    <!-- Lifted 1.5 meters high (Y-axis) -->
-    <a-entity position="0 1.5 0">
-        <a-text value="YOU ARE AT LOBBY" align="center" color="#fffb00" scale="2 2 2" look-at="[camera]"></a-text>
-    </a-entity>
-    
-    <!-- A large gold ball to make it obvious -->
-    <a-sphere position="0 0.5 0" radius="0.3" color="gold" animation="property: position; to: 0 0.8 0; dir: alternate; dur: 1000; loop: true"></a-sphere>
-`;
+        // --- MARKER 2: FIRST JUNCTION ---
+        m2 = `
+            <a-text value="TURN LEFT AND GO STRAIGHT UNTIL JUNCTION 2" position="0 1.5 0" align="center" color="#00FFFF" look-at="[camera]"></a-text>
+            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 -90 0"></a-entity>`;
+
+        // --- MARKER 3: SECOND JUNCTION (Confirmation) ---
+        m3 = `
+            <a-text value="TURN LEFT" position="0 1.5 0" align="center" color="#00FFFF" look-at="[camera]"></a-text>
+            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 0 0"></a-entity>`;
+
+        // --- MARKER 4: FINAL JUNCTION ---
+        m4 = `
+            <a-text value="ENTER THE HALLWAY BEHIND YOUR BACK AND LR 5 IS ON YOUR RIGHT" position="0 1.5 0" align="center" color="#00FFFF" look-at="[camera]"></a-text>
+            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 90 0"></a-entity>`;
+
+        // --- MARKER 5: ARRIVAL (LR 5) ---
+        m5 = `
+            <a-text value="DESTINATION REACHED" position="0 1.8 0" align="center" color="#00FF00" look-at="[camera]"></a-text>
+            <a-text value="LR 5" position="0 1.4 0" align="center" color="white" look-at="[camera]"></a-text>
+            <a-entity geometry="primitive: sphere" material="color: gold" animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; loop: true"></a-entity>`;
     }
 
     return `
-        <a-marker type="barcode" value="1">${marker1Content}</a-marker>
-        <a-marker type="barcode" value="2">${marker2Content}</a-marker>
+        <a-marker type="barcode" value="1">${m1}</a-marker>
+        <a-marker type="barcode" value="2">${m2}</a-marker>
+        <a-marker type="barcode" value="3">${m3}</a-marker>
+        <a-marker type="barcode" value="4">${m4}</a-marker>
+        <a-marker type="barcode" value="5">${m5}</a-marker>
     `;
-}
 }
