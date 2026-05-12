@@ -17,22 +17,22 @@
     <div id="ui-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none;">
         
         <div id="floor-menu" style="position: absolute; top: 20px; left: 10px; pointer-events: auto; display: flex; gap: 10px;">
-            <button class="dest-btn" onclick="showLevelRooms(1)" style="background: #00FFFF; color: black; padding: 15px;">LEVEL 1</button>
-            <button class="dest-btn" onclick="showLevelRooms(2)" style="background: #00FFFF; color: black; padding: 15px;">LEVEL 2</button>
+            <button class="dest-btn" onclick="showLevelRooms(1)" style="background: #00ffd0; color: black; padding: 15px;">LEVEL 1</button>
+            <button class="dest-btn" onclick="showLevelRooms(2)" style="background: #00ffd0; color: black; padding: 15px;">LEVEL 2</button>
         </div>
 
         <div id="destination-menu" style="display: none; position: absolute; top: 80px; left: 10px; width: 160px; height: 350px; overflow-y: auto; background: rgba(0,0,0,0.85); border: 2px solid #00FFFF; border-radius: 10px; padding: 10px; pointer-events: auto;">
             
            <!-- LEVEL 1 ROOM LIST -->
 <div id="level-1-list" style="display: none;">
-    <div style="color: #00FFFF; font-size: 11px; text-align: center; margin-bottom: 10px;">L1 ROOMS</div>
+    <div style="color: #00ffd0; font-size: 11px; text-align: center; margin-bottom: 10px;">L1 ROOMS</div>
     <button class="dest-btn" onclick="setDestination('Lobby')">Lobby (Entrance)</button>
     <button class="dest-btn" onclick="setDestination('LR 5')">LR 5</button>
 </div>
 
 <!-- LEVEL 2 ROOM LIST -->
 <div id="level-2-list" style="display: none;">
-    <div style="color: #00FFFF; font-size: 11px; text-align: center; margin-bottom: 10px;">L2 ROOMS</div>
+    <div style="color: #00ffd0; font-size: 11px; text-align: center; margin-bottom: 10px;">L2 ROOMS</div>
     <button class="dest-btn" onclick="setDestination('MPH')">Multi Purpose Hall</button>
 </div>
             
