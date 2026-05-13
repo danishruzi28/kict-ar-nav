@@ -13,7 +13,7 @@ function loadLevel2() {
        
         m8 = `
             <a-text value="TAKE THE STAIRS TO LEVEL 2" position="0 1.5 0" align="center" color="#00FFFF" look-at="[camera]" scale ="1 1 1"></a-text>
-            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 90 0" position="0 0.2 0" scale="0.5 0.7 0.5"></a-entity>`;
+            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 0 0" position="0 0.2 0" scale="0.5 0.7 0.5"></a-entity>`;
 
         m9 = `
             <a-text value="DESTINATION REACHED" position="0 1.8 0" align="center" color="#00FF00" look-at="[camera]" scale ="1 1 1"></a-text>
