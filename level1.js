@@ -5,7 +5,9 @@ function loadLevel1() {
         // --- MARKER 1: LOBBY ---
         m1 = `
             <a-text value="TURN LEFT AND GO TO JUNCTION 1" position="0 1.8 0" align="center" color="#00FFFF" look-at="[camera]" scale ="1 1 1"></a-text>
-            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 90 0" position="0 0.2 0" scale="0.5 0.7 0.5"></a-entity>`;
+            <a-entity geometry="primitive: cone" material="color: lime" rotation="-90 90 0" position="0 0.2 0" scale="0.5 0.7 0.5"></a-entity>
+            <a-text value="LR 5 IS RIGHT" position="0 2.2 0" align="center" color="#00FFFF" look-at="[camera]"></a-text>
+            <a-text value="MPH IS LEFT" position="0 1.8 0" align="center" color="#FF00FF" look-at="[camera]"></a-text>`;
 
         // --- MARKER 2: FIRST JUNCTION ---
         m2 = `
